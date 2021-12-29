@@ -10,11 +10,11 @@
       <v-list>
         <v-list-item>
           <v-list-item-avatar>
-            <img src="@/assets/img/logo.png" alt="Logo" />
+            <v-img src="@/assets/img/NA-logo-square.png" alt="Logo"/>
           </v-list-item-avatar>
           <v-list-item-content>
-            <v-list-item-title class="title">Calango</v-list-item-title>
-            <v-list-item-subtitle>WEB</v-list-item-subtitle>
+            <v-list-item-title class="title">IT комитет</v-list-item-title>
+            <v-list-item-subtitle>"Западная Россия"</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -58,7 +58,7 @@
         v-if="isXs"
       />
       <div v-else>
-        <v-btn text @click="$vuetify.goTo('#hero')">
+        <v-btn text @click="$vuetify.goTo('#home')">
           <span class="mr-2">О нас</span>
         </v-btn>
         <v-btn text @click="$vuetify.goTo('#features')">
@@ -89,11 +89,9 @@ export default {
     drawer: null,
     isXs: false,
     items: [
-      ["mdi-home-outline", "Home", "#hero"],
-      ["mdi-information-outline", "Sobre", "#features"],
-      ["mdi-download-box-outline", "Download", "#download"],
-      ["mdi-currency-usd", "Preços", "#pricing"],
-      ["mdi-email-outline", "Contatos", "#contact"],
+      ["mdi-home-outline", "О нас", "#home"],
+      ["mdi-information-outline", "Служения", "#features"],
+      ["mdi-email-outline", "Контакты", "#contact"],
     ],
   }),
   props: {

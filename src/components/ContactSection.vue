@@ -5,55 +5,46 @@
         <v-col cols="10">
           <v-row justify="center">
             <v-col cols="12" sm="5">
-              <h1 class="font-weight-light display-1">Contate-nos</h1>
+              <h1 class="font-weight-light display-1">Хочешь служить в IT-комитете или есть вопросы?</h1>
               <h3 class="font-weight-light mt-3">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste
-                explicabo commodi quisquam asperiores dolore ad enim provident
-                veniam perferendis voluptate, perspiciatis.
+                Заполни форму и мы с тобой свяжемся.
               </h3>
               <h3 class="font-weight-light mt-3">
-                Lorem ipsum dolor sit amet consectetur adipisicing.
+                Также ты можешь написать в телеграм или на почту: 
               </h3>
               <h3 class="font-weight-light mt-3">
-                Telefone: +xx (xx) xxxxx-xxxx
+                Telegram: <a href="https://telegram.me/an_jin" target="_blank">@an_jin</a>
               </h3>
               <h3 class="font-weight-light">
-                Email: email@email.com
+                Email: <a href="mailto:admin@rko-na.ru">admin@rko-na.ru</a>
               </h3>
             </v-col>
             <v-col cols="12" sm="7">
-              <v-form ref="form" v-model="valid" :lazy-validation="lazy">
+              <v-form ref="form">
                 <v-text-field
-                    v-model="name"
-                    :rules="nameRules"
-                    label="Nome"
+                    label="Имя"
                     required
                 ></v-text-field>
 
                 <v-text-field
-                    v-model="email"
-                    :rules="emailRules"
-                    label="E-mail"
+                    label="Телефон"
                     required
                 ></v-text-field>
 
                 <v-textarea
-                    v-model="textArea"
-                    :rules="textAreaRules"
-                    label="Mensagem"
+                    label="Сообщение"
                     required
+                    auto-grows
+                    rows="3"
                 />
 
                 <v-btn
-                    :disabled="!valid"
                     color="primary"
-                    :dark="valid"
                     rounded
                     block
                     class="mt-3"
-                    @click="submit"
                 >
-                  Enviar
+                  Отправить
                 </v-btn>
               </v-form>
             </v-col>
@@ -64,25 +55,6 @@
     <div class="svg-border-waves text-white">
       <v-img src="~@/assets/img/borderWavesBlue.svg"/>
     </div>
-    <v-snackbar
-        v-model="snackbar.enabled"
-        timeout="3000"
-        right
-        top
-        :color="snackbar.color"
-    >
-      {{ snackbar.text }}
-
-      <template v-slot:action="{ attrs }">
-        <v-btn
-            text
-            v-bind="attrs"
-            @click="snackbar.enabled = false"
-        >
-          Fechar
-        </v-btn>
-      </template>
-    </v-snackbar>
   </section>
 </template>
 
@@ -101,52 +73,3 @@
 }
 
 </style>
-
-<script>
-// import {db} from '@/main'
-
-export default {
-  data: () => ({
-    icons: ["fa-facebook", "fa-twitter", "fa-linkedin", "fa-instagram"],
-    valid: true,
-    name: "",
-    nameRules: [
-      (v) => !!v || "O campo nome é obrigatório",
-      (v) => (v && v.length >= 6) || "O nome precisa ter mais de 6 caracteres",
-    ],
-    email: "",
-    emailRules: [
-      (v) => !!v || "O campo email é obrigatório",
-      (v) => /.+@.+\..+/.test(v) || "O E-mail precisa ser válido",
-    ],
-    textArea: "",
-    textAreaRules: [
-      (v) => !!v || "O campo de texto é obrigatório",
-      (v) => (v && v.length >= 10) || "Mínimo de 10 caracteres",
-    ],
-    lazy: false,
-    snackbar: {
-      enabled: false,
-      text: '',
-      color: ''
-    }
-  }),
-  methods: {
-    submit() {
-      /*db.collection("contactData").add({
-        name: this.name,
-        email: this.email,
-        message: this.textArea
-      }).then(() => {
-        this.snackbar.text = "Mensagem enviada com sucesso"
-        this.snackbar.color = "success"
-        this.snackbar.enabled = true
-      }).catch(() => {
-        this.snackbar.text = "Erro ao enviar mensagem"
-        this.snackbar.color = "danger"
-        this.snackbar.enabled = true
-      })*/
-    }
-  }
-};
-</script>
