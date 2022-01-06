@@ -23,7 +23,7 @@
                     </li>
                     <li>
                       <p class="text-justify text-body-1">
-                        Наш пилотный проект - база знаний wiki-na.ru. Цель проекта, собрать материалы по всем видам служений в АН в одном месте. 
+                        Наш пилотный проект - база знаний <a href="https://www.wiki-na.ru" target="__blank">wiki-na.ru</a>. Цель проекта, собрать материалы по всем видам служений в АН в одном месте. 
                       </p>
                     </li>
                     <li>
@@ -33,11 +33,11 @@
                     </li>
                     <li>
                       <p class="text-justify text-body-1">
-                        Рабочие собрания подкомитета проходят каждый четверг в 19-00 по МСК в Zoom-комнате  2101201212 (код доступа 1212). 
+                        Рабочие собрания подкомитета проходят каждый четверг в 19-00 по МСК в Zoom-комнате <a href="https://us02web.zoom.us/j/2101201212?pwd=NjhGUzM1OXAyY3RWVjdCM0FQV2RqUT09" target="__blank" class="font-weight-medium"> 2101201212 (код доступа 1212)</a>. 
                       </p>
                     </li>
                     <li>
-                      <p class="text-justify text-body-1">
+                      <p class="text-justify text-body-1 font-weight-medium">
                         Приходи, ты нам нужен!
                       </p>
                     </li>

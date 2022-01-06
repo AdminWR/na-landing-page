@@ -49,7 +49,8 @@
       :class="{ expand: flat }"
     >
       <v-toolbar-title>
-        <v-img src="@/assets/img/NA-logo-square.png" max-width="50px"/>
+            <!-- <v-btn > -->
+        <v-img src="@/assets/img/NA-logo-square.png" max-width="50px" @click="$vuetify.goTo('#home')"/>
       </v-toolbar-title>
       <v-spacer />
       <v-app-bar-nav-icon
@@ -58,11 +59,8 @@
         v-if="isXs"
       />
       <div v-else>
-        <v-btn text @click="$vuetify.goTo('#home')">
-          <span class="mr-2">О нас</span>
-        </v-btn>
         <v-btn text @click="$vuetify.goTo('#features')">
-          <span class="mr-2">Служение</span>
+          <span class="mr-2">О нас</span>
         </v-btn>
         <v-btn rounded outlined text @click="$vuetify.goTo('#contact')">
           <span class="mr-2">Контакты</span>
@@ -89,8 +87,7 @@ export default {
     drawer: null,
     isXs: false,
     items: [
-      ["mdi-home-outline", "О нас", "#home"],
-      ["mdi-information-outline", "Служения", "#features"],
+      ["mdi-information-outline", "О нас", "#features"],
       ["mdi-email-outline", "Контакты", "#contact"],
     ],
   }),
