@@ -41,9 +41,8 @@
             >
               <v-hover v-slot:default="{ hover }">
                 <v-card 
-                  @click.stop="dialog = true"
+                  rounded="xl"
                   class="card"
-                  shaped
                   :elevation="hover ? 10 : 4"
                   :class="{ up: hover }"
                 >
@@ -54,12 +53,20 @@
                     :class="{ 'zoom-efect': hover }"
                   ></v-img>
                   <h1 class="font-weight-regular">{{ feature.title }}</h1>
-
-                  <ul>
+                  <ul class="card-content">
                     <li v-for="(require,j) in feature.requires" :key="j" class="font-weight-regular subtitle-1 text-left">
                       {{ require }}
                     </li>
                   </ul>
+                  <v-btn
+                    rounded
+                    outlined
+                    color="indigo"
+                    class="mt-2 mb-3"
+                    @click.stop="dialog = true"
+                  >
+                    Узнать о служении
+                  </v-btn>
                 </v-card>
               </v-hover>
             </v-col>
@@ -109,12 +116,12 @@
                 </v-col>
                 <v-col cols="12">
                   <v-textarea
-                      v-model="msg"
-                      :rules="msgRules"
-                      label="Сообщение*"
-                      required
-                      auto-grows
-                      rows="3"
+                    v-model="msg"
+                    :rules="msgRules"
+                    label="Сообщение*"
+                    required
+                    auto-grows
+                    rows="3"
                   />
                 </v-col>
               </v-row>
@@ -200,7 +207,7 @@ export default {
           requires: [
             "От 1 года ЧВ", 
             "Знание PHP", 
-            "Желательно понимание работы одного или нескольких фреймворков: YII2, Laravel, Simfony"
+            "Желательно понимание работы хотя бы одного из фреймворков: YII2, Laravel, Simfony"
           ],
         },
         {
@@ -268,9 +275,11 @@ export default {
   padding: 10px;
   transition: 0.5s ease-out;
 }
+.card-content {
+  min-height: 130px;
+}
 
 .card .v-image {
-  margin-bottom: 15px;
   transition: 0.75s;
 }
 
