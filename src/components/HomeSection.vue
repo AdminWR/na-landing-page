@@ -173,7 +173,7 @@ export default {
       tel: "",
       msg: "",
       msgRules: [
-        (v) => !!v || "Поле адреса сообщения является обязательным",
+        (v) => !!v || "Сообщение является обязательным. Например, напишите какое служение Вас заинтересовало?",
         (v) => (v && v.length >= 10) || "Введите хотя бы 10 символов. Например, какое служение Вас заинтересовало.",
       ],
       lazy: false,
@@ -216,10 +216,6 @@ export default {
     };
   },
   methods: {
-    submitModal() {
-      this.dialog = false;
-      this.submit();
-    },
     submit() {
       db.collection("contactData").add({
         name: this.name,
@@ -230,11 +226,16 @@ export default {
         this.snackbar.text = "Ваша заявка успешно отправлена"
         this.snackbar.color = "success"
         this.snackbar.enabled = true
+        this.$refs.form.reset()
       }).catch(() => {
         this.snackbar.text = "При отправке произошла ошибка. Сообщите об этом администратору сайта или по контактным данным."
         this.snackbar.color = "danger"
         this.snackbar.enabled = true
       })
+    },
+    submitModal() {
+      this.dialog = false;
+      this.submit();
     }
   }
 };

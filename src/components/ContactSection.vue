@@ -53,12 +53,12 @@
                         </v-col>
                         <v-col cols="12">
                           <v-textarea
-                              v-model="msg"
-                              :rules="msgRules"
-                              label="Сообщение*"
-                              required
-                              auto-grows
-                              rows="3"
+                            v-model="msg"
+                            :rules="msgRules"
+                            label="Сообщение*"
+                            required
+                            auto-grows
+                            rows="3"
                           />
                         </v-col>
                       </v-row>
