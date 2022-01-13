@@ -162,7 +162,7 @@ export default {
           requires: [
             "От 1 года ЧВ", 
             "Знание HTML/CSS", 
-            "Желательно навык работы с js-фреймворками (Vue.js, React, Angular)"
+            "Желательно навык работы хотя бы с одиним из js-фреймворков: Vue.js, React, Angular"
           ],
         },
       ],
