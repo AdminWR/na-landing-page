@@ -90,9 +90,29 @@
     >
       <contactform 
         :service-title="dialog.data.title"
-        @success="closeModal"
+        @success="successFormPost"
+        @error="errorFormPost"
       />
     </v-dialog>
+
+    <v-snackbar
+      v-model="snackbar.enabled"
+      timeout="3000"
+      right
+      top
+      :color="snackbar.color"
+    >
+      {{ snackbar.text }}
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          text
+          v-bind="attrs"
+          @click="snackbar.enabled = false"
+        >
+          Закрыть
+        </v-btn>
+      </template>
+    </v-snackbar>
   </section>
 </template>
 
@@ -111,6 +131,11 @@ export default {
         data: {
           title: "",
         },
+      },
+      snackbar: {
+          enabled: false,
+          text: '',
+          color: '',
       },
       features: [
         {
@@ -144,8 +169,16 @@ export default {
     };
   },
   methods: {
-    closeModal() {
-      this.dialog.isOpen = false;
+    successFormPost() {
+      this.snackbar.text = "Ваша заявка успешно отправлена"
+      this.snackbar.color = "success"
+      this.snackbar.enabled = true
+      this.dialog.isOpen = false
+    },
+    errorFormPost() {
+      this.snackbar.text = "При отправке произошла ошибка. Сообщите об этом администратору сайта или по контактным данным."
+      this.snackbar.color = "danger"
+      this.snackbar.enabled = true
     }
   }
 };
@@ -161,9 +194,6 @@ export default {
   overflow: hidden;
 }
 
-#home {
-  z-index: 0;
-}
 .svg-border-waves img {
   position: absolute;
   bottom: 0;

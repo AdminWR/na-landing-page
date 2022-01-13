@@ -20,7 +20,7 @@
                 <v-text-field
                   v-model="email"
                   :rules="emailRules"
-                  label="Email*"
+                  label="Email"
                   type="email"
                   required
                 />
@@ -38,7 +38,7 @@
                 <v-textarea
                 v-model="msg"
                 :rules="msgRules"
-                label="Сообщение*"
+                label="Сообщение"
                 required
                 auto-grows
                 rows="3"
@@ -61,25 +61,6 @@
         </v-card-actions>
       </v-card>
     </v-form>
-
-    <v-snackbar
-      v-model="snackbar.enabled"
-      timeout="3000"
-      right
-      top
-      :color="snackbar.color"
-    >
-      {{ snackbar.text }}
-      <template v-slot:action="{ attrs }">
-        <v-btn
-          text
-          v-bind="attrs"
-          @click="snackbar.enabled = false"
-        >
-          Закрыть
-        </v-btn>
-      </template>
-    </v-snackbar>
   </section>
 </template>
 
@@ -109,12 +90,7 @@ export default {
                 (v) => (v && v.length >= 10) || "Введите хотя бы 10 символов. Например, какое служение Вас заинтересовало.",
             ],
             lazy: false,
-            valid: true,
-            snackbar: {
-                enabled: false,
-                text: '',
-                color: ''
-            },
+            valid: true
         }    
     },
     props: {
@@ -129,16 +105,11 @@ export default {
                 msg: this.msg,
                 title: this.serviceTitle,
             }).then(() => {
-                this.snackbar.text = "Ваша заявка успешно отправлена"
-                this.snackbar.color = "success"
-                this.snackbar.enabled = true
                 this.$refs.form.reset()
                 this.$emit('success');
             }).catch(() => {
-                this.snackbar.text = "При отправке произошла ошибка. Сообщите об этом администратору сайта или по контактным данным."
-                this.snackbar.color = "danger"
-                this.snackbar.enabled = true
-            })
+                this.$emit('error');
+            });
         }
     }
 }
