@@ -67,7 +67,8 @@
                     outlined
                     color="indigo"
                     class="mt-2 mb-3"
-                    @click.stop="dialog = true"
+                    @click="dialog.data.title = feature.title"
+                    @click.stop="dialog.isOpen = true"
                   >
                     Узнать о служении
                   </v-btn>
@@ -84,10 +85,13 @@
     </div>
 
     <v-dialog
-      v-model="dialog"
+      v-model="dialog.isOpen"
       max-width="600px"
     >
-      <contactform @success="closeModal"/>
+      <contactform 
+        :service-title="dialog.data.title"
+        @success="closeModal"
+      />
     </v-dialog>
   </section>
 </template>
@@ -102,7 +106,12 @@ export default {
 
   data() {
     return {
-      dialog: false,
+      dialog: {
+        isOpen: false,
+        data: {
+          title: "",
+        },
+      },
       features: [
         {
           img: require("@/assets/img/icon2.png"),
@@ -136,7 +145,7 @@ export default {
   },
   methods: {
     closeModal() {
-      this.dialog = false;
+      this.dialog.isOpen = false;
     }
   }
 };

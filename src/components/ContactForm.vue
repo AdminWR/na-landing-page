@@ -117,6 +117,9 @@ export default {
             },
         }    
     },
+    props: {
+      serviceTitle: String
+    },
     methods: {
         submit() {
             axios.post('https://api.na-promo.ru/api/forms',{
@@ -124,6 +127,7 @@ export default {
                 email: this.email,
                 tel: this.tel,
                 msg: this.msg,
+                title: this.serviceTitle,
             }).then(() => {
                 this.snackbar.text = "Ваша заявка успешно отправлена"
                 this.snackbar.color = "success"
