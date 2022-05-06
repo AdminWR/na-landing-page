@@ -5,7 +5,10 @@
         <v-col cols="10">
           <v-row align="center" justify="center">
             <v-col cols="12" md="6" xl="8">
-              <h1 class="display-2 font-weight-bold mb-4">IT комитет региона <br> "Западная Россия"</h1>
+              <h1 class="display-2 font-weight-bold mb-4">
+                IT комитет региона <br />
+                "Западная Россия"
+              </h1>
               <h1 class="font-weight-light">Ищет служащих!</h1>
               <v-btn
                 rounded
@@ -40,7 +43,7 @@
               :key="i"
             >
               <v-hover v-slot:default="{ hover }">
-                <v-card 
+                <v-card
                   rounded="xl"
                   class="card"
                   :elevation="hover ? 10 : 4"
@@ -54,7 +57,11 @@
                   ></v-img>
                   <h1 class="font-weight-regular">{{ feature.title }}</h1>
                   <ul class="card-content">
-                    <li v-for="(require,j) in feature.requires" :key="j" class="font-weight-regular subtitle-1 text-left">
+                    <li
+                      v-for="(require, j) in feature.requires"
+                      :key="j"
+                      class="font-weight-regular subtitle-1 text-left"
+                    >
                       {{ require }}
                     </li>
                   </ul>
@@ -79,10 +86,7 @@
       <img src="~@/assets/img/wave2.svg" />
     </div>
 
-    <v-dialog
-      v-model="dialog"
-      max-width="600px"
-    >
+    <v-dialog v-model="dialog" max-width="600px">
       <v-form ref="form" v-model="valid" :lazy-validation="lazy">
         <v-card>
           <v-card-title>
@@ -153,11 +157,7 @@
       {{ snackbar.text }}
 
       <template v-slot:action="{ attrs }">
-        <v-btn
-            text
-            v-bind="attrs"
-            @click="snackbar.enabled = false"
-        >
+        <v-btn text v-bind="attrs" @click="snackbar.enabled = false">
           Закрыть
         </v-btn>
       </template>
@@ -166,7 +166,7 @@
 </template>
 
 <script>
-import {db} from '@/main'
+// import { db } from "@/main";
 
 export default {
   data() {
@@ -175,48 +175,53 @@ export default {
       email: "",
       emailRules: [
         (v) => !!v || "Поле адреса электронной почты является обязательным.",
-        (v) => /.+@.+\..+/.test(v) || "Введите корректный адрес электронной почты",
+        (v) =>
+          /.+@.+\..+/.test(v) || "Введите корректный адрес электронной почты",
       ],
       tel: "",
       msg: "",
       msgRules: [
-        (v) => !!v || "Сообщение является обязательным. Например, напишите какое служение Вас заинтересовало?",
-        (v) => (v && v.length >= 10) || "Введите хотя бы 10 символов. Например, какое служение Вас заинтересовало.",
+        (v) =>
+          !!v ||
+          "Сообщение является обязательным. Например, напишите какое служение Вас заинтересовало?",
+        (v) =>
+          (v && v.length >= 10) ||
+          "Введите хотя бы 10 символов. Например, какое служение Вас заинтересовало.",
       ],
       lazy: false,
       valid: true,
       dialog: false,
       snackbar: {
         enabled: false,
-        text: '',
-        color: ''
+        text: "",
+        color: "",
       },
       features: [
         {
           img: require("@/assets/img/icon2.png"),
           title: "Редактор сайта",
           requires: [
-            "От 1 года ЧВ", 
-            "Уверенный пользователь ПК", 
-            "Понимание структуры Сообщества АН"
+            "От 1 года ЧВ",
+            "Уверенный пользователь ПК",
+            "Понимание структуры Сообщества АН",
           ],
         },
         {
           img: require("@/assets/img/icon1.png"),
           title: "Разработчик Back-end",
           requires: [
-            "От 1 года ЧВ", 
-            "Знание PHP", 
-            "Желательно понимание работы хотя бы одного из фреймворков: YII2, Laravel, Simfony"
+            "От 1 года ЧВ",
+            "Знание PHP",
+            "Желательно понимание работы хотя бы одного из фреймворков: YII2, Laravel, Simfony",
           ],
         },
         {
           img: require("@/assets/img/icon3.png"),
           title: "Разработчик Front-end",
           requires: [
-            "От 1 года ЧВ", 
-            "Знание HTML/CSS", 
-            "Желательно навык работы с js-фреймворками (Vue.js, React, Angular)"
+            "От 1 года ЧВ",
+            "Знание HTML/CSS",
+            "Желательно навык работы с js-фреймворками (Vue.js, React, Angular)",
           ],
         },
       ],
@@ -224,27 +229,31 @@ export default {
   },
   methods: {
     submit() {
-      db.collection("contactData").add({
-        name: this.name,
-        email: this.email,
-        tel: this.tel,
-        msg: this.msg,
-      }).then(() => {
-        this.snackbar.text = "Ваша заявка успешно отправлена"
-        this.snackbar.color = "success"
-        this.snackbar.enabled = true
-        this.$refs.form.reset()
-      }).catch(() => {
-        this.snackbar.text = "При отправке произошла ошибка. Сообщите об этом администратору сайта или по контактным данным."
-        this.snackbar.color = "danger"
-        this.snackbar.enabled = true
-      })
+      db.collection("contactData")
+        .add({
+          name: this.name,
+          email: this.email,
+          tel: this.tel,
+          msg: this.msg,
+        })
+        .then(() => {
+          this.snackbar.text = "Ваша заявка успешно отправлена";
+          this.snackbar.color = "success";
+          this.snackbar.enabled = true;
+          this.$refs.form.reset();
+        })
+        .catch(() => {
+          this.snackbar.text =
+            "При отправке произошла ошибка. Сообщите об этом администратору сайта или по контактным данным.";
+          this.snackbar.color = "danger";
+          this.snackbar.enabled = true;
+        });
     },
     submitModal() {
       this.dialog = false;
       this.submit();
-    }
-  }
+    },
+  },
 };
 </script>
 

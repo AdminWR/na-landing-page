@@ -10,7 +10,7 @@
       <v-list>
         <v-list-item>
           <v-list-item-avatar>
-            <v-img src="@/assets/img/NA-logo-square.png" alt="Logo"/>
+            <v-img src="@/assets/img/NA-logo-square.png" alt="Logo" />
           </v-list-item-avatar>
           <v-list-item-content>
             <v-list-item-title class="title">IT комитет</v-list-item-title>
@@ -32,9 +32,9 @@
             <v-icon>{{ icon }}</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            <v-list-item-title class="subtitile-1">{{
-              text
-            }}</v-list-item-title>
+            <v-list-item-title class="subtitile-1">
+              {{ text }}
+            </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -49,8 +49,12 @@
       :class="{ expand: flat }"
     >
       <v-toolbar-title>
-            <!-- <v-btn > -->
-        <v-img src="@/assets/img/NA-logo-square.png" max-width="50px" @click="$vuetify.goTo('#home')"/>
+        <!-- <v-btn > -->
+        <v-img
+          src="@/assets/img/NA-logo-square.png"
+          max-width="50px"
+          @click="$vuetify.goTo('/#home')"
+        />
       </v-toolbar-title>
       <v-spacer />
       <v-app-bar-nav-icon
@@ -59,6 +63,11 @@
         v-if="isXs"
       />
       <div v-else>
+        <router-link to="/registration"
+          ><v-btn text>
+            <span class="mr-2">Регистрация</span>
+          </v-btn></router-link
+        >
         <v-btn text @click="$vuetify.goTo('#features')">
           <span class="mr-2">О нас</span>
         </v-btn>
@@ -70,7 +79,7 @@
   </div>
 </template>
 
-<style scoped>
+<style>
 .v-toolbar {
   transition: 0.6s;
 }

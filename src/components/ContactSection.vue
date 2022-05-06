@@ -5,15 +5,18 @@
         <v-col cols="10">
           <v-row justify="center">
             <v-col cols="12" sm="5">
-              <h1 class="font-weight-light display-1">Хочешь служить в IT-комитете или есть вопросы?</h1>
+              <h1 class="font-weight-light display-1">
+                Хочешь служить в IT-комитете или есть вопросы?
+              </h1>
               <h3 class="font-weight-light mt-3">
                 Заполни форму и мы с тобой свяжемся.
               </h3>
               <h3 class="font-weight-light mt-3">
-                Также ты можешь написать в телеграм или на почту: 
+                Также ты можешь написать в телеграм или на почту:
               </h3>
               <h3 class="font-weight-light mt-3">
-                Telegram: <a href="https://telegram.me/an_jin" target="_blank">@an_jin</a>
+                Telegram:
+                <a href="https://telegram.me/an_jin" target="_blank">@an_jin</a>
               </h3>
               <h3 class="font-weight-light">
                 Email: <a href="mailto:admin@rko-na.ru">admin@rko-na.ru</a>
@@ -85,7 +88,7 @@
       </v-row>
     </v-container>
     <div class="svg-border-waves text-white">
-      <v-img src="~@/assets/img/borderWavesBlue.svg"/>
+      <v-img src="~@/assets/img/borderWavesBlue.svg" />
     </div>
     <v-snackbar
       v-model="snackbar.enabled"
@@ -97,11 +100,7 @@
       {{ snackbar.text }}
 
       <template v-slot:action="{ attrs }">
-        <v-btn
-            text
-            v-bind="attrs"
-            @click="snackbar.enabled = false"
-        >
+        <v-btn text v-bind="attrs" @click="snackbar.enabled = false">
           Закрыть
         </v-btn>
       </template>
@@ -122,10 +121,9 @@
   width: 100%;
   overflow: hidden;
 }
-
 </style>
 <script>
-import {db} from '@/main'
+// import {db} from '@/main'
 
 export default {
   data() {
@@ -134,41 +132,48 @@ export default {
       email: "",
       emailRules: [
         (v) => !!v || "Поле адреса электронной почты является обязательным.",
-        (v) => /.+@.+\..+/.test(v) || "Введите корректный адрес электронной почты",
+        (v) =>
+          /.+@.+\..+/.test(v) || "Введите корректный адрес электронной почты",
       ],
       tel: "",
       msg: "",
       msgRules: [
         (v) => !!v || "Поле адреса сообщения является обязательным",
-        (v) => (v && v.length >= 10) || "Введите хотя бы 10 символов. Например, какое служение Вас заинтересовало.",
+        (v) =>
+          (v && v.length >= 10) ||
+          "Введите хотя бы 10 символов. Например, какое служение Вас заинтересовало.",
       ],
       lazy: false,
       valid: true,
       dialog: false,
       snackbar: {
         enabled: false,
-        text: '',
-        color: ''
+        text: "",
+        color: "",
       },
     };
   },
   methods: {
     submit() {
-      db.collection("contactData").add({
-        name: this.name,
-        email: this.email,
-        tel: this.tel,
-        msg: this.msg,
-      }).then(() => {
-        this.snackbar.text = "Ваша заявка успешно отправлена"
-        this.snackbar.color = "success"
-        this.snackbar.enabled = true
-      }).catch(() => {
-        this.snackbar.text = "При отправке произошла ошибка. Сообщите об этом администратору сайта или по контактным данным."
-        this.snackbar.color = "danger"
-        this.snackbar.enabled = true
-      })
-    }
-  }
+      db.collection("contactData")
+        .add({
+          name: this.name,
+          email: this.email,
+          tel: this.tel,
+          msg: this.msg,
+        })
+        .then(() => {
+          this.snackbar.text = "Ваша заявка успешно отправлена";
+          this.snackbar.color = "success";
+          this.snackbar.enabled = true;
+        })
+        .catch(() => {
+          this.snackbar.text =
+            "При отправке произошла ошибка. Сообщите об этом администратору сайта или по контактным данным.";
+          this.snackbar.color = "danger";
+          this.snackbar.enabled = true;
+        });
+    },
+  },
 };
 </script>
