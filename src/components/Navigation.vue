@@ -10,7 +10,9 @@
       <v-list>
         <v-list-item>
           <v-list-item-avatar>
-            <v-img src="@/assets/img/NA-logo-square.png" alt="Logo" />
+            <router-link to="/">
+              <v-img src="@/assets/img/NA-logo-square.png" alt="Logo" />
+            </router-link>
           </v-list-item-avatar>
           <v-list-item-content>
             <v-list-item-title class="title">IT комитет</v-list-item-title>
@@ -50,11 +52,13 @@
     >
       <v-toolbar-title>
         <!-- <v-btn > -->
-        <v-img
-          src="@/assets/img/NA-logo-square.png"
-          max-width="50px"
-          @click="$vuetify.goTo('/#home')"
-        />
+        <router-link to="/">
+          <v-img
+            src="@/assets/img/NA-logo-square.png"
+            max-width="50px"
+            @click="$vuetify.goTo('#home')"
+          />
+        </router-link>
       </v-toolbar-title>
       <v-spacer />
       <v-app-bar-nav-icon

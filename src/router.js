@@ -10,7 +10,7 @@ const routes = [
     },
     {
         path: '/registration',
-        component: () => import('./Pages/Auth')
+        component: () => import('./Pages/Registration')
     },
     {
         path: '/login',
