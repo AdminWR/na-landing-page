@@ -1,9 +1,7 @@
 <template>
   <div class="container-form__body">
-    <form action="" class="auth-registration">
-      <label for="name" class="auth-label">Введите имя</label>
-      <input type="text" class="auth-input" id="name" v-model="name" />
-      <label for="email" class="auth-label">Email*</label>
+    <form action="" class="auth-registration" @submit.prevent="login">
+      <label for="email" class="auth-label">Email</label>
       <input
         type="email"
         class="auth-input"
@@ -11,7 +9,7 @@
         v-model="email"
         required
       />
-      <label for="password" class="auth-label">Пароль*</label>
+      <label for="password" class="auth-label">Пароль</label>
       <input
         type="password"
         class="auth-input"
@@ -19,19 +17,8 @@
         v-model="passMain"
         required
       />
-      <label for="sub-password" class="auth-label">Повторение пароля*</label>
-      <input
-        type="password"
-        class="auth-input"
-        id="sub-password"
-        v-model="passConfirm"
-        required
-      />
-      <button class="auth-btn" type="submit" @click.prevent="onSubmit">
-        Зарегистрироваться
-      </button>
+      <button class="auth-btn" type="submit">Войти</button>
     </form>
-    <MessangeBlock v-show="checkSend"></MessangeBlock>
   </div>
 </template>
 
@@ -40,21 +27,22 @@ export default {
   name: "FormRegistr",
   data() {
     return {
-      name: "",
       email: "",
       passMain: "",
-      passConfirm: "",
     };
   },
   mounted() {
     this.name = this.email = this.passMain = this.passConfirm = "";
   },
   methods: {
-    onSubmit() {
-      console.log([this.name, this.email, this.passMain, this.passConfirm]);
+    login() {
+      let email = this.email;
+      let password = this.passMain;
+      this.$store.dispatch("loginSee", { email, password });
+      this.$router.push("/");
     },
   },
-  components: { MessangeBlock },
+  components: {},
 };
 </script>
 

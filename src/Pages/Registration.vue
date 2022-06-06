@@ -21,9 +21,10 @@ export default {
 .for-bg
   background-image: url('../assets/img/bgDrawer.jpg')
   display: flex
-  min-height: 95vh
+  min-height: 100vh
   background-position: center
   align-items: center
+  margin-bottom: -54px
 .container-form
   color: #fff
   max-width: 1110px
@@ -32,4 +33,8 @@ export default {
   flex-direction: column
   &__body
     width: 500px
+.auth
+  &-title
+    text-align: center
+    margin-bottom: 12px
 </style>

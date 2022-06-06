@@ -4,16 +4,13 @@
       <label for="name" class="auth-label">Введите имя</label>
       <input type="text" class="auth-input" id="name" v-model="nameUser" />
       <label for="email" class="auth-label">Email*</label>
-      <input
-        type="email"
-        class="auth-input"
-        id="email"
-        v-model="email"
-        required
-      />
+      <input type="email" class="auth-input" id="email" v-model.trim="email" />
       <transition name="slide-fade">
-        <MessageError v-show="errorCheck === 1">
+        <MessageError v-if="$v.email.$dirty && !$v.email.required">
           Введите электронную почту, пожалуйста.
+        </MessageError>
+        <MessageError v-else-if="$v.email.$dirty && !$v.email.email">
+          Введите корерктный электронный адрес.
         </MessageError>
       </transition>
       <label for="password" class="auth-label">Пароль*</label>
@@ -22,11 +19,15 @@
         class="auth-input"
         id="password"
         v-model="passMain"
-        required
       />
       <transition name="slide-fade">
-        <MessageError v-show="errorCheck === 3">
-          Пароль не должен быть меньше {{ lengthPassMax }}
+        <MessageError v-if="$v.passMain.$dirty && $v.passMain.required">
+          Введите пароль, пожалуйста.
+        </MessageError>
+        <MessageError v-else-if="$v.passMain.$dirty && $v.passMain.minLength">
+          Пароль не должен быть меньше
+          {{ $v.passMain.$params.minLength.min }} символов, сейчас
+          {{ passMain.length }} символов.
         </MessageError>
       </transition>
       <label for="sub-password" class="auth-label">Повторение пароля*</label>
@@ -35,20 +36,20 @@
         class="auth-input"
         id="sub-password"
         v-model="passConfirm"
-        required
       />
       <transition name="slide-fade">
-        <MessageError v-show="errorCheck === 2">
+        <MessageError v-show="errorCheck === 1">
           Пароли должны совпадать.
         </MessageError>
       </transition>
-      <button class="auth-btn" type="submit" :disabled="errorCheck > 0">
+      <button class="auth-btn" type="submit" :disabled="$v.$invalid">
         Зарегистрироваться
       </button>
     </form>
     <transition name="slide-fade">
       <MessangeBlock v-show="checkSend"
-        >Спасибо, регистрация прошла успешно.</MessangeBlock
+        >Спасибо, регистрация прошла успешно. Сейчас Вас перенаправят на
+        страницу входа.</MessangeBlock
       >
     </transition>
   </div>
@@ -57,57 +58,61 @@
 <script>
 import MessangeBlock from "../Messange/MessangeBlock.vue";
 import MessageError from "../Messange/MessageError.vue";
+import { mapGetters, mapActions } from "vuex";
+import { email, required, minLength } from "vuelidate/lib/validators";
 export default {
   name: "FormRegistr",
   data() {
     return {
       nameUser: "Аноним",
-      email: null,
-      passMain: null,
-      passConfirm: null,
+      email: "",
+      passMain: "",
+      passConfirm: "",
       checkSend: false,
       errorCheck: 0,
-      lengthPassMax: 6,
     };
   },
-  mounted() {
-    this.errorCheck = 0;
+  validations: {
+    email: { email, required },
+    passMain: { required, minLength: minLength(6) },
   },
   watch: {
-    passConfirm: "checkEquality",
-    email: "checkEqualityMail",
-    passMain: "checkEquality",
+    passConfirm: "checkEqualityPass",
   },
   methods: {
+    ...mapActions(["register"]),
     onSubmit() {
       this.checkSend = true;
+      if (this.$v.$invalid) {
+        this.$v.$touch();
+        return;
+      }
       setTimeout(() => {
+        this.$router.push("/login");
         this.checkSend = false;
-        this.errorCheck = 0;
       }, 5000);
+      const data = {
+        name: this.nameUser,
+        email: this.email,
+        password: this.passMain,
+      };
+      this.register(data);
       this.nameUser = this.email = this.passMain = this.passConfirm = "";
+      console.log("data ->", data);
     },
-    checkEquality() {
+    checkEqualityPass() {
       if (this.passMain !== this.passConfirm) {
-        this.errorCheck = 2;
-      } else {
-        this.errorCheck = 0;
-      }
-      if (this.passMain.length < this.lengthPassMax) {
-        this.errorCheck = 3;
-      } else {
-        this.errorCheck = 0;
-      }
-    },
-    checkEqualityMail() {
-      if (this.email === "") {
         this.errorCheck = 1;
       } else {
         this.errorCheck = 0;
       }
     },
   },
-  components: { MessangeBlock, MessageError },
+  computed: mapGetters["fullUser"],
+  components: {
+    MessangeBlock,
+    MessageError,
+  },
 };
 </script>
 

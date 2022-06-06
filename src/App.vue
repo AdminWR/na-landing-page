@@ -34,6 +34,7 @@ export default {
       flat: null,
       fab: null,
       color: "",
+      isLogin: false,
     };
   },
   created() {

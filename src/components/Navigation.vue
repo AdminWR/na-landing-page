@@ -67,6 +67,11 @@
         v-if="isXs"
       />
       <div v-else>
+        <router-link to="/login"
+          ><v-btn text>
+            <span class="mr-2">Войти</span>
+          </v-btn></router-link
+        >
         <router-link to="/registration"
           ><v-btn text>
             <span class="mr-2">Регистрация</span>
