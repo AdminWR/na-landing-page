@@ -75,6 +75,7 @@ export default {
   validations: {
     email: { email, required },
     passMain: { required, minLength: minLength(6) },
+    passConfirm: { required },
   },
   watch: {
     passConfirm: "checkEqualityPass",
@@ -98,7 +99,6 @@ export default {
       };
       this.register(data);
       this.nameUser = this.email = this.passMain = this.passConfirm = "";
-      console.log("data ->", data);
     },
     checkEqualityPass() {
       if (this.passMain !== this.passConfirm) {
@@ -143,13 +143,4 @@ export default {
     margin: auto
     &:disabled
       opacity: .5
-.slide-fade-enter-active
-  transition: all .3s ease
-
-.slide-fade-leave-active
-  transition: all .5s cubic-bezier(1.0, 0.5, 0.8, 1.0)
-
-.slide-fade-enter, .slide-fade-leave-to
-  transform: translateY(10px)
-  opacity: 0
 </style>

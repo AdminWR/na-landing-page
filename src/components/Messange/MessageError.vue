@@ -8,11 +8,11 @@
 
 <style lang="sass">
 .messange
-    &-error
-        background-color: #ff7f50
-        padding: 12px
-        border-radius: 5px
-        margin-bottom: 12px
+  &-error
+    background-color: #ff7f50
+    padding: 12px
+    border-radius: 5px
+    margin-bottom: 12px
     &-text
-        margin: 0 !important
+      margin: 0 !important
 </style>

@@ -16,6 +16,18 @@
 textarea {
   resize: none;
 }
+
+.slide-fade-enter-active {
+  transition: all 0.3s ease;
+}
+.slide-fade-leave-active {
+  transition: all 0.5s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-enter,
+.slide-fade-leave-to {
+  transform: translateY(10px);
+  opacity: 0;
+}
 </style>
 
 <script>
@@ -47,7 +59,6 @@ export default {
 
   watch: {
     fab(value) {
-      console.log(value);
       if (value) {
         this.color = "secondary";
         this.flat = false;

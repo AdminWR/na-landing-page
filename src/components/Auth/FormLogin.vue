@@ -9,6 +9,12 @@
         v-model="email"
         required
       />
+      <transition name="slide-fade">
+        <MessageError v-if="!$v.email.required"> Введите e-mail.</MessageError>
+        <MessageError v-else-if="!$v.email.email">
+          Введите корретный e-mail.</MessageError
+        >
+      </transition>
       <label for="password" class="auth-label">Пароль</label>
       <input
         type="password"
@@ -17,12 +23,22 @@
         v-model="passMain"
         required
       />
-      <button class="auth-btn" type="submit">Войти</button>
+      <transition name="slide-fade">
+        <MessageError v-show="!$v.passMain.required">
+          Введите пароль
+        </MessageError>
+      </transition>
+      <button class="auth-btn" type="submit" :disabled="$v.$invalid">
+        Войти
+      </button>
     </form>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
+import { email, required } from "vuelidate/lib/validators";
+import MessageError from "../Messange/MessageError.vue";
 export default {
   name: "FormRegistr",
   data() {
@@ -31,18 +47,24 @@ export default {
       passMain: "",
     };
   },
-  mounted() {
-    this.name = this.email = this.passMain = this.passConfirm = "";
+  validations: {
+    email: { email, required },
+    passMain: { required },
   },
   methods: {
+    ...mapState(["isLogin"]),
     login() {
-      let email = this.email;
-      let password = this.passMain;
-      this.$store.dispatch("loginSee", { email, password });
+      let onLogin = {
+        email: this.email,
+        password: this.passMain,
+      };
+      this.$store.dispatch("loginSee", onLogin);
       this.$router.push("/");
     },
   },
-  components: {},
+  components: {
+    MessageError,
+  },
 };
 </script>
 
@@ -71,4 +93,7 @@ export default {
   &-btn
     padding: 12px 24px
     margin: auto
+
+    &:disabled
+      opacity: .5
 </style>

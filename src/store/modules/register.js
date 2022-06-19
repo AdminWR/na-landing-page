@@ -7,7 +7,7 @@ export default{
     },
     actions: {
         async register({commit}, data){ 
-            let res = await axios.post('http://localhost:3000/register', data);
+            let res = await axios.post('http://localhost:3000/register', data)
             let recordUser = await res.json();
             await commit('addUser', recordUser)
         }
@@ -15,7 +15,6 @@ export default{
     mutations: {
         addUser(state, item){
             state.user.unshift(item)
-            console.log('state ->', state.user);
         }
     },
     getters: {
