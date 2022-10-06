@@ -12,7 +12,7 @@ export default{
     },
     actions: {
         async loginSee({commit}, data){
-            const res = await axios.post('http://localhost:3000/login', data);
+            const res = await axios.post('https://api.na-promo.ru/login', data);
             commit('isLoginUser', state.user.push(res.data))
         }
     },
