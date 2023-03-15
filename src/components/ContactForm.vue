@@ -98,7 +98,7 @@ export default {
     },
     methods: {
         submit() {
-            axios.post('https://api.na-promo.ru/api/forms',{
+            axios.post('https://api.rko-na.ru/api/forms',{
                 name: this.name,
                 email: this.email,
                 tel: this.tel,
